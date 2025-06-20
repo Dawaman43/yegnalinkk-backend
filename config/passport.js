@@ -2,12 +2,16 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const User = require("../models/user");
 
+const CALLBACK_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://yegnalinkk-backend.onrender.com/user/google/callback"
+    : "http://localhost:4000/user/google/callback";
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_sECRET,
-      callbackURL: "/user/google/callback",
+      callbackURL: CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
