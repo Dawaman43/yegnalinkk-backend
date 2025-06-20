@@ -17,7 +17,7 @@ const port = process.env.PORT || 4000;
 const app = express();
 
 app.use(passport.initialize());
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use("/user", authRouter);
 app.use("/profile", profileRouter);
@@ -41,7 +41,6 @@ mongoose
     console.log("Mongodb connected successfully");
     try {
       await mongoose.connection.db.collection("users").dropIndex("userId_1");
-      console.log("Dropped userId_1 index");
     } catch (err) {
       if (err.codeName === "IndexNotFound") {
         console.log("userId_1 index not found, no action needed");
