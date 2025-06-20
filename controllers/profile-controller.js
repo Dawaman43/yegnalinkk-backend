@@ -1,4 +1,4 @@
-const Profile = require("../models/Profile");
+const Profile = require("../models/profile");
 const cloudinary = require("cloudinary").v2;
 
 const getProfile = async (req, res) => {
