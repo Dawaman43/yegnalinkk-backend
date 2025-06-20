@@ -39,15 +39,6 @@ mongoose
   .connect(process.env.mongo_url)
   .then(async () => {
     console.log("Mongodb connected successfully");
-    try {
-      await mongoose.connection.db.collection("users").dropIndex("userId_1");
-    } catch (err) {
-      if (err.codeName === "IndexNotFound") {
-        console.log("userId_1 index not found, no action needed");
-      } else {
-        console.error("Error dropping userId_1 index:", err);
-      }
-    }
     server.listen(port, (error) => {
       if (error) {
         console.error("Server startup failed:", error);
